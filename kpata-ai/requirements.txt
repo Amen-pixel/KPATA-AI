@@ -1,0 +1,6 @@
+# Phase 0 : le code n'utilise que la bibliothèque standard de Python.
+# Outils de développement :
+pytest
+# Phase 1 (à décommenter quand on en aura besoin) :
+# pandas
+# numpy
