@@ -1,8 +1,10 @@
-# Génère briefs_fr.json : 20 briefs annotés en français (lot 1)
+# Génère briefs_fr.json : les annonces annotées en français
+# Format et règles d'annotation : docs/guide_annotation.md
 import json
 
 from kpata.brief import nouveau_brief as s
 
+# Lot 1 : 20 annonces écrites par Amen.
 # (intent, ce que dit la personne, champs extraits, prêt attendu ?, piège)
 B = [
  ("promotion", "J'ai une boutique de chaussures à Calavi. Réduction de 20% vendredi et samedi. Mon numéro c'est 0197000000.",
@@ -35,8 +37,8 @@ B = [
   s(business_type="boutique d'habits", product="habits", promotion="150%", location="Cotonou", phone="0197000111"), False, "pourcentage impossible"),
  ("annonce_service", "Quincaillerie à Sèmè-Kpodji, ciment à 5 500 F le sac. Téléphone 12345.",
   s(business_type="quincaillerie", product="ciment", price="5 500 F", location="Sèmè-Kpodji", phone="12345"), False, "numéro invalide"),
- ("evenement", "Pour la Saint-Valentin, mon fleuriste à Saint-Michel, Cotonou, fait moins 20% sur les bouquets. 0197333444.",
-  s(business_type="fleuriste", product="bouquets", promotion="20%", location="Saint-Michel, Cotonou", phone="0197333444", start_date="14 février"), True, "date implicite : Saint-Valentin = 14 février"),
+ ("promotion", "Pour la Saint-Valentin, mon fleuriste à Saint-Michel, Cotonou, fait moins 20% sur les bouquets. 0197333444.",
+  s(business_type="fleuriste", product="bouquets", promotion="20%", location="Saint-Michel, Cotonou", phone="0197333444", start_date="14 février"), True, "date implicite : Saint-Valentin = 14 février (fête à date fixe). Une promo à l'occasion d'une fête reste une promotion, pas un evenement : voir guide §2"),
  ("offre_limitee", "Sacs à moins 40% samedi seulement, ma boutique est à Cotonou. 0197555666.",
   s(business_type="boutique de sacs", product="sacs", promotion="40%", location="Cotonou", phone="0197555666", start_date="samedi"), True, ""),
  ("promotion", "Mon auto-école à Calavi donne 10 000 F de réduction sur l'inscription. Appelez le 0196777888.",
