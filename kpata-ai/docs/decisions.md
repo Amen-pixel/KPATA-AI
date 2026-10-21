@@ -85,3 +85,51 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
 - **Note** : si une seule des deux bornes est valide (« du 28 au 30 février »),
   on ne garde que la borne sûre et la fin reste `None`. On ne garde jamais une
   date qui n'existe pas.
+
+## D-005 — Poids revus selon le QA Agent ; seuil proposé à 0,6
+
+- **Date** : 21 octobre 2026
+- **Auteur** : Zozerigué (tâche B)
+- **Statut** : proposé
+- **Décision appliquée** : les poids suivent la criticité pour le QA Agent
+  (cahier §12) et non la place sur l'affiche. `location` passe de 2 à 3 (le QA
+  vérifie « lieu exact », et le lieu est obligatoire pour les sept intentions) ;
+  `business_name` passe de 2 à 1 (nom propre fragile à l'ASR, non vérifié par
+  le QA, `business_type` suffit à rédiger l'affiche).
+- **Décision proposée, NON appliquée** : faire passer `SEUIL` de 0,5 à 0,6. La
+  constante `SEUIL` reste à 0,5 dans le code ; la valeur proposée est exposée
+  sous le nom `SEUIL_PROPOSE` pour pouvoir être testée sans changer le
+  comportement du système.
+- **Raison** : mesures sur les 20 annonces de `briefs_fr.json` (détail au §5 de
+  `schema_annonce.md`). Aucun seuil testé ne produit de faux positif, avec aucun
+  barème : le seuil ne protège donc pas de la règle d'or, ce sont les champs
+  obligatoires et la validation qui le font. Monter le seuil ne peut que
+  refuser des annonces légitimes. Avec les poids d'origine, 0,6 bloquait quatre
+  annonces complètes et publiables ; avec le nouveau barème, 0,6 garde 20/20
+  d'accords. C'est la seule combinaison qui ajoute une marge de sécurité sans
+  rien casser.
+- **Réserve** : 20 annonces sont trop peu pour trancher. À réexaminer sur les
+  150 annonces de la tâche D, puis sur de vraies transcriptions en Phase 1,
+  où l'ASR fera manquer des champs que l'annotation manuelle capture sans peine.
+
+## D-006 — Trois écarts de nommage par rapport au cahier des charges
+
+- **Date** : 21 octobre 2026
+- **Auteur** : Zozerigué (tâche B)
+- **Statut** : proposé
+- **Décision** : le schéma s'écarte du §6 du cahier sur trois points, tous
+  documentés au §2 de `schema_annonce.md`.
+  1. Le champ `dates` du §6 est éclaté en `start_date` et `end_date`. L'exemple
+     du §4 utilise lui-même les deux champs séparés, et le §12 demande au QA de
+     vérifier que « les dates sont exactes » : c'est impossible avec un champ
+     unique.
+  2. Le `media` du §4 garde le nom `requested_media` du §6. Le cahier emploie
+     les deux ; on retient celui du schéma de dataset, car c'est une demande de
+     l'utilisateur et non le support finalement produit.
+  3. `audio_path` et `transcript` (§6) ne sont pas des slots du brief mais des
+     champs d'enveloppe de l'annonce. Ils sont décrits séparément au §1 du
+     document. `audio_path` reste vide en Phase 0 (annonces écrites à la main)
+     et devient obligatoire en Phase 1.
+- **Raison** : le cahier des charges prime, mais il se contredit lui-même entre
+  §4 et §6 sur les dates et le nom du support. Le choix retenu est celui qui
+  rend la vérification du QA Agent possible.

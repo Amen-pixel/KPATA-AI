@@ -13,9 +13,12 @@ CHAMPS = ["language", "intent", "business_name", "business_type", "product",
           "currency",    # devise du prix : "XOF" (franc CFA) ou "NGN" (naira)
           "start_date", "end_date", "location", "phone", "tone", "requested_media"]
 
-# Poids : plus un champ compte sur l'affiche, plus il pèse dans le score C
-POIDS = {"phone": 3, "product": 3, "promotion": 3, "price": 3, "location": 2,
-         "business_name": 2, "start_date": 2, "business_type": 1, "end_date": 1,
+# Poids : le poids d'un champ suit sa criticité pour le QA Agent (cahier §12),
+# pas sa simple présence sur l'affiche. Barème justifié dans docs/schema_annonce.md §5.
+# `location` est à 3 (vérifié par le QA, obligatoire pour les 7 intentions) et
+# `business_name` à 1 (nom propre fragile à l'ASR, non vérifié par le QA).
+POIDS = {"phone": 3, "product": 3, "promotion": 3, "price": 3, "location": 3,
+         "start_date": 2, "business_name": 1, "business_type": 1, "end_date": 1,
          "tone": 1, "requested_media": 1, "currency": 1}
 
 # Champs OBLIGATOIRES selon l'intention. Un tuple = "au moins un des deux".
@@ -30,7 +33,12 @@ OBLIGATOIRES = {
     "annonce_service": ["product", *BASE],
 }
 SOUHAITES = ["business_name", "business_type", "start_date", "end_date", "tone", "requested_media"]
+
+# Seuil du feu vert. 0,5 reste EN VIGUEUR : la proposition de passer à 0,6
+# n'est pas encore validée par l'équipe, et une proposition ne doit pas changer
+# le comportement du système. Voir docs/schema_annonce.md §5 et decisions.md D-005.
 SEUIL = 0.5
+SEUIL_PROPOSE = 0.6
 
 
 def _membres(item):
