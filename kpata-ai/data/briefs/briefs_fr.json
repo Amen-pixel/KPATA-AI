@@ -19,7 +19,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "cas de référence du cahier des charges"
+    "piege": "cas de référence du cahier des charges",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 2,
@@ -41,7 +43,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "ancien format à 8 chiffres"
+    "piege": "ancien format à 8 chiffres",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 3,
@@ -63,7 +67,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "prix avec espace"
+    "piege": "prix avec espace",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 4,
@@ -85,7 +91,9 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "téléphone manquant"
+    "piege": "téléphone manquant",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 5,
@@ -107,7 +115,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "pourcentage écrit en lettres"
+    "piege": "pourcentage écrit en lettres",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 6,
@@ -129,7 +139,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "restock sans promo : OK, la promo n'est pas obligatoire pour un restock"
+    "piege": "restock sans promo : OK, la promo n'est pas obligatoire pour un restock",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 7,
@@ -151,7 +163,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": ""
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 8,
@@ -173,7 +187,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "pas de jour précis"
+    "piege": "pas de jour précis",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 9,
@@ -195,7 +211,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": ""
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 10,
@@ -217,7 +235,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": ""
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 11,
@@ -239,7 +259,9 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "téléphone manquant"
+    "piege": "téléphone manquant",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 12,
@@ -261,7 +283,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "service sans promo"
+    "piege": "service sans promo",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 13,
@@ -283,7 +307,9 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "lieu manquant"
+    "piege": "lieu manquant",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 14,
@@ -305,7 +331,9 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "pourcentage impossible"
+    "piege": "pourcentage impossible",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 15,
@@ -327,7 +355,9 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "numéro invalide"
+    "piege": "numéro invalide",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 16,
@@ -349,7 +379,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "date implicite : Saint-Valentin = 14 février (fête à date fixe). Une promo à l'occasion d'une fête reste une promotion, pas un evenement : voir guide §2"
+    "piege": "date implicite : Saint-Valentin = 14 février (fête à date fixe). Une promo à l'occasion d'une fête reste une promotion, pas un evenement : voir guide §2",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 17,
@@ -371,7 +403,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": ""
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 18,
@@ -393,7 +427,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "réduction en francs"
+    "piege": "réduction en francs",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 19,
@@ -415,7 +451,9 @@
       "requested_media": null
     },
     "pret_attendu": true,
-    "piege": "+229 devant un numéro à 8 chiffres"
+    "piege": "+229 devant un numéro à 8 chiffres",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
   },
   {
     "id": 20,
@@ -437,6 +475,728 @@
       "requested_media": null
     },
     "pret_attendu": false,
-    "piege": "ni produit ni promo"
+    "piege": "ni produit ni promo",
+    "source": "ecrit_equipe",
+    "annotateur": "AQ"
+  },
+  {
+    "id": 21,
+    "transcript": "Journée portes ouvertes samedi dans mon centre de formation à Akpakpa, Cotonou. Appelez le 0197404040.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "centre de formation",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "samedi",
+      "end_date": null,
+      "location": "Akpakpa, Cotonou",
+      "phone": "0197404040",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "evenement sans produit ni prix : accepté, seule la date est obligatoire",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 22,
+    "transcript": "Grande braderie dimanche au marché de Kano. Mon numéro, 08123456789.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "commerce de marché",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "dimanche",
+      "end_date": null,
+      "location": "Kano",
+      "phone": "08123456789",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "numéro nigérian à 11 chiffres commençant par 081",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 23,
+    "transcript": "On organise un défilé de mode le 14 mars à Ibadan. Contact : +234 802 777 8899.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "atelier de couture",
+      "product": "défilé de mode",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "14 mars",
+      "end_date": null,
+      "location": "Ibadan",
+      "phone": "+234 802 777 8899",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "numéro +234 avec espaces",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 24,
+    "transcript": "Portes ouvertes à mon école de couture à Niamey, le 5 décembre. Téléphone 96 55 44 33.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "école de couture",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "5 décembre",
+      "end_date": null,
+      "location": "Niamey",
+      "phone": "96 55 44 33",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "8 chiffres + lieu nigérien : doit donner +227 et non +229",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 25,
+    "transcript": "Il y a une fête chez moi à Maradi, venez nombreux. Mon numéro 90 11 22 33.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "commerce",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Maradi",
+      "phone": "90 11 22 33",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "date manquante : obligatoire pour un evenement",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 26,
+    "transcript": "Journée promotionnelle le 30 février à Porto-Novo. 0197888111.",
+    "slots": {
+      "language": "francais",
+      "intent": "evenement",
+      "business_name": null,
+      "business_type": "boutique",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "30 février",
+      "end_date": null,
+      "location": "Porto-Novo",
+      "phone": "0197888111",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "date impossible : le 30 février n'existe pas",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 27,
+    "transcript": "Je lance un service de livraison à moto à Cotonou, 1 000 F la course. Mon numéro 0197010203.",
+    "slots": {
+      "language": "francais",
+      "intent": "lancement",
+      "business_name": null,
+      "business_type": "service de livraison",
+      "product": "livraison à moto",
+      "promotion": null,
+      "price": "1 000 F",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Cotonou",
+      "phone": "0197010203",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 28,
+    "transcript": "Nouveau yaourt maison dans ma boutique à Lagos, 500 naira le pot. Appelez le +234 806 111 2233.",
+    "slots": {
+      "language": "francais",
+      "intent": "lancement",
+      "business_name": null,
+      "business_type": "boutique d'alimentation",
+      "product": "yaourt maison",
+      "promotion": null,
+      "price": "500 naira",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Lagos",
+      "phone": "+234 806 111 2233",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "prix en naira : la devise doit être NGN",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 29,
+    "transcript": "Je lance mes cours de soutien scolaire à Parakou, 15 mille F le mois. 0196303030.",
+    "slots": {
+      "language": "francais",
+      "intent": "lancement",
+      "business_name": null,
+      "business_type": "cours de soutien",
+      "product": "cours de soutien scolaire",
+      "promotion": null,
+      "price": "15 mille F",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Parakou",
+      "phone": "0196303030",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "prix écrit en lettres : 15 mille F",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 30,
+    "transcript": "Je lance une nouvelle gamme de savons à Zinder. Mon numéro 92 44 55 66.",
+    "slots": {
+      "language": "francais",
+      "intent": "lancement",
+      "business_name": null,
+      "business_type": "fabrique de savons",
+      "product": "savons",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Zinder",
+      "phone": "92 44 55 66",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "lancement sans prix : accepté",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 31,
+    "transcript": "Je lance quelque chose de nouveau, appelez-moi au 0197121314.",
+    "slots": {
+      "language": "francais",
+      "intent": "lancement",
+      "business_name": null,
+      "business_type": "commerce",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": null,
+      "phone": "0197121314",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "ni produit ni lieu",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 32,
+    "transcript": "Ma pharmacie ouvre le 2 novembre à Kaduna. Numéro : 08091234567.",
+    "slots": {
+      "language": "francais",
+      "intent": "ouverture",
+      "business_name": null,
+      "business_type": "pharmacie",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": "2 novembre",
+      "end_date": null,
+      "location": "Kaduna",
+      "phone": "08091234567",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 33,
+    "transcript": "J'ouvre une deuxième boutique à Tahoua la semaine prochaine. 97 88 99 00.",
+    "slots": {
+      "language": "francais",
+      "intent": "ouverture",
+      "business_name": null,
+      "business_type": "boutique",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Tahoua",
+      "phone": "97 88 99 00",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "« la semaine prochaine » n'est pas une date exploitable : start_date reste null, et ce n'est pas bloquant pour une ouverture",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 34,
+    "transcript": "Mon maquis ouvre vendredi à Bohicon, le plat est à 1 500 F. Mon numéro 0155667788.",
+    "slots": {
+      "language": "francais",
+      "intent": "ouverture",
+      "business_name": null,
+      "business_type": "maquis",
+      "product": "plat",
+      "promotion": null,
+      "price": "1 500 F",
+      "currency": null,
+      "start_date": "vendredi",
+      "end_date": null,
+      "location": "Bohicon",
+      "phone": "0155667788",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 35,
+    "transcript": "Mon atelier de menuiserie ouvre bientôt à Dosso. Téléphone 94 12 13 14.",
+    "slots": {
+      "language": "francais",
+      "intent": "ouverture",
+      "business_name": null,
+      "business_type": "atelier de menuiserie",
+      "product": null,
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Dosso",
+      "phone": "94 12 13 14",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "8 chiffres + Dosso : doit donner +227",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 36,
+    "transcript": "Le gaz est revenu dans mon dépôt à Godomey, 4 500 F la bouteille. 0196454545.",
+    "slots": {
+      "language": "francais",
+      "intent": "restock",
+      "business_name": null,
+      "business_type": "dépôt de gaz",
+      "product": "gaz",
+      "promotion": null,
+      "price": "4 500 F",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Godomey",
+      "phone": "0196454545",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "« est revenu » : c'est bien un restock, pas une annonce_service",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 37,
+    "transcript": "Nouvel arrivage de riz à Maradi, 12 mille le sac. Mon numéro 96 78 78 78.",
+    "slots": {
+      "language": "francais",
+      "intent": "restock",
+      "business_name": null,
+      "business_type": "vendeur de riz",
+      "product": "riz",
+      "promotion": null,
+      "price": "12 mille",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Maradi",
+      "phone": "96 78 78 78",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "prix en lettres sans unité : la devise reste indéterminée",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 38,
+    "transcript": "J'ai reçu des pièces détachées à Ibadan, ₦3500 la pièce. +234 803 909 0909.",
+    "slots": {
+      "language": "francais",
+      "intent": "restock",
+      "business_name": null,
+      "business_type": "magasin de pièces détachées",
+      "product": "pièces détachées",
+      "promotion": null,
+      "price": "₦3500",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Ibadan",
+      "phone": "+234 803 909 0909",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "symbole naira collé au nombre",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 39,
+    "transcript": "Les cahiers sont de nouveau disponibles, 300 F l'unité. 0197676767.",
+    "slots": {
+      "language": "francais",
+      "intent": "restock",
+      "business_name": null,
+      "business_type": "librairie",
+      "product": "cahiers",
+      "promotion": null,
+      "price": "300 F",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": null,
+      "phone": "0197676767",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "lieu manquant",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 40,
+    "transcript": "Je suis plombier à Niamey, j'intervien chez vous. Mon numéro 98 23 24 25.",
+    "slots": {
+      "language": "francais",
+      "intent": "annonce_service",
+      "business_name": null,
+      "business_type": "plombier",
+      "product": "intervention à domicile",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Niamey",
+      "phone": "98 23 24 25",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "faute de frappe dans la transcription : on garde le texte tel quel",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 41,
+    "transcript": "Mon studio photo à Lagos fait les photos d'identité, 1 500 naira. +234 805 343 4343.",
+    "slots": {
+      "language": "francais",
+      "intent": "annonce_service",
+      "business_name": null,
+      "business_type": "studio photo",
+      "product": "photos d'identité",
+      "promotion": null,
+      "price": "1 500 naira",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Lagos",
+      "phone": "+234 805 343 4343",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 42,
+    "transcript": "Je répare les téléphones à Cotonou. Mon numéro, c'est 01 97 ... attendez ... 0197828384.",
+    "slots": {
+      "language": "francais",
+      "intent": "annonce_service",
+      "business_name": null,
+      "business_type": "réparation de téléphones",
+      "product": "réparation de téléphones",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Cotonou",
+      "phone": "0197828384",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "hésitation à l'oral : on annote la dernière valeur énoncée (guide §4.5)",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 43,
+    "transcript": "Chez moi à Agadez, le pagne passe de 8 000 à 6 500 F. Mon numéro 95 19 19 19.",
+    "slots": {
+      "language": "francais",
+      "intent": "promotion",
+      "business_name": null,
+      "business_type": "vendeuse de tissus",
+      "product": "pagne",
+      "promotion": "1 500 F",
+      "price": "6 500 F",
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Agadez",
+      "phone": "95 19 19 19",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "prix et réduction en même temps : on remplit les deux, la réduction est la baisse (guide §4.4)",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 44,
+    "transcript": "Pour Noël, moins 30% sur les jouets dans ma boutique à Calavi. 0196929292.",
+    "slots": {
+      "language": "francais",
+      "intent": "promotion",
+      "business_name": null,
+      "business_type": "boutique de jouets",
+      "product": "jouets",
+      "promotion": "30%",
+      "price": null,
+      "currency": null,
+      "start_date": "25 décembre",
+      "end_date": null,
+      "location": "Abomey-Calavi",
+      "phone": "0196929292",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "fête à date fixe : Noël = 25 décembre (guide §4.1)",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 45,
+    "transcript": "Pour la Tabaski, je fais moins 20% sur les moutons à Kano. +234 807 111 2222.",
+    "slots": {
+      "language": "francais",
+      "intent": "promotion",
+      "business_name": null,
+      "business_type": "vendeur de bétail",
+      "product": "moutons",
+      "promotion": "20%",
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Kano",
+      "phone": "+234 807 111 2222",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "fête mobile : la Tabaski change de date, start_date reste null (guide §4.1)",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 46,
+    "transcript": "Au lieu de 5 000 F, venez voir mes chaussures à Porto-Novo. 0197353637.",
+    "slots": {
+      "language": "francais",
+      "intent": "promotion",
+      "business_name": null,
+      "business_type": "boutique de chaussures",
+      "product": "chaussures",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Porto-Novo",
+      "phone": "0197353637",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "« au lieu de » sans nouveau prix : ni price ni promotion, on ne calcule rien (guide §4.4)",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 47,
+    "transcript": "Prix cassés sur les ustensiles à Dantokpa, venez. 0196141516.",
+    "slots": {
+      "language": "francais",
+      "intent": "promotion",
+      "business_name": null,
+      "business_type": "vendeur d'ustensiles",
+      "product": "ustensiles",
+      "promotion": null,
+      "price": null,
+      "currency": null,
+      "start_date": null,
+      "end_date": null,
+      "location": "Dantokpa",
+      "phone": "0196141516",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": false,
+    "piege": "« prix cassés » n'est pas une réduction chiffrée : promotion reste null",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 48,
+    "transcript": "Du 15 au 20 octobre seulement, moins 40% sur les valises à Cotonou. 0197505152.",
+    "slots": {
+      "language": "francais",
+      "intent": "offre_limitee",
+      "business_name": null,
+      "business_type": "boutique de valises",
+      "product": "valises",
+      "promotion": "40%",
+      "price": null,
+      "currency": null,
+      "start_date": "du 15 au 20 octobre",
+      "end_date": null,
+      "location": "Cotonou",
+      "phone": "0197505152",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "période : start_date et end_date doivent être remplis séparément",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 49,
+    "transcript": "Du 28 octobre au 3 novembre uniquement, le poulet est à ₦2500 à Lagos. +234 809 626 2626.",
+    "slots": {
+      "language": "francais",
+      "intent": "offre_limitee",
+      "business_name": null,
+      "business_type": "restaurant",
+      "product": "poulet",
+      "promotion": null,
+      "price": "₦2500",
+      "currency": null,
+      "start_date": "du 28 octobre au 3 novembre",
+      "end_date": null,
+      "location": "Lagos",
+      "phone": "+234 809 626 2626",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "période à cheval sur deux mois",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
+  },
+  {
+    "id": 50,
+    "transcript": "Du vendredi au dimanche seulement, moins 15% sur la coiffure à Niamey. 93 27 28 29.",
+    "slots": {
+      "language": "francais",
+      "intent": "offre_limitee",
+      "business_name": null,
+      "business_type": "salon de coiffure",
+      "product": "coiffure",
+      "promotion": "15%",
+      "price": null,
+      "currency": null,
+      "start_date": "du vendredi au dimanche",
+      "end_date": null,
+      "location": "Niamey",
+      "phone": "93 27 28 29",
+      "tone": null,
+      "requested_media": null
+    },
+    "pret_attendu": true,
+    "piege": "période en jours nommés : start_date et end_date remplis depuis la période",
+    "source": "ecrit_equipe",
+    "annotateur": "TZ"
   }
 ]
