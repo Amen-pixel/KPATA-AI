@@ -186,3 +186,33 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
   tant que la traduction n'est pas faite. Les tests ne vérifient aujourd'hui que
   la cohérence de leurs slots, pas leur texte. C'est le point bloquant principal
   de la Phase 0 : il faut trouver un locuteur Yorùbá et un locuteur Hausa.
+
+## D-009 — Fusion des PR #1 à #5 sans relecture préalable
+
+- **Date** : 21 octobre 2026
+- **Auteur** : décision de l'équipe
+- **Statut** : validé par l'équipe
+- **Décision** : les Pull Requests #1 à #5 ont été fusionnées dans `main` sans
+  relecture préalable, par décision de l'équipe, pour tenir la fin de la
+  Phase 0 (25 octobre 2026). **Relecture a posteriori demandée** : Amen pour la
+  normalisation (PR #1), Eudes pour le schéma (PR #2, refaite en PR #6). Suivi
+  dans l'issue « Relecture a posteriori Phase 0 ».
+- **Raison** : l'échéance de la Phase 0 est le 25 octobre et les tâches B et C
+  étaient déjà en retard (attendues les 18 et 19 octobre). Fusionner maintenant
+  débloque Amen et Eudes, qui travaillent tous deux sur des fichiers dépendant
+  du schéma.
+- **Écart assumé avec le README** : la règle 2 du `README.md` impose qu'une
+  autre personne relise avant toute fusion dans `main`. Cette règle est
+  volontairement suspendue pour ces cinq PR. Elle reste la règle par défaut
+  pour la suite : cette exception ne crée pas de précédent.
+- **Garanties conservées malgré l'absence de relecture** : `pytest` est vert sur
+  `main` (830 tests), chaque PR a été fusionnée par un merge commit sans
+  réécriture d'historique, et aucun commit n'a été fait directement sur `main`
+  en dehors des fusions.
+- **Incident technique à connaître** : la PR #1 a été fusionnée avec
+  `--delete-branch`. La suppression de sa branche a fermé automatiquement la
+  PR #2, qui était basée dessus, et GitHub refuse de rouvrir une PR dont la base
+  n'existe plus. Le travail a été repris à l'identique dans la **PR #6**, basée
+  sur `main`. Leçon pour la suite : sur une pile de PR, rebasculer les bases sur
+  `main` **avant** de fusionner, et ne pas supprimer les branches tant que la
+  pile n'est pas entièrement fusionnée.
