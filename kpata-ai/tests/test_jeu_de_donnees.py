@@ -20,7 +20,12 @@ A_TRADUIRE = {
     for langue in ("yoruba", "hausa")
 }
 TOUT = FR + A_TRADUIRE["yoruba"] + A_TRADUIRE["hausa"]
-SOURCES = {"ecrit_equipe", "natif", "traduit_verifie", "traduit_non_verifie", "a_traduire"}
+SOURCES = {"ecrit_equipe", "natif", "traduit_verifie", "traduit_auto",
+           "traduit_non_verifie", "a_traduire", "synthese_vocale"}
+# Sources qui ne sont pas des voix ni des textes humains : elles ne doivent
+# jamais servir a mesurer une performance presentee comme reelle (D-010).
+SOURCES_AUTOMATIQUES = {"traduit_auto", "traduit_non_verifie", "synthese_vocale"}
+
 
 
 # --------------------------------------------------------------------------- #
@@ -125,3 +130,25 @@ def test_le_moteur_donne_le_feu_vert_attendu(annonce):
     brief = normaliser_brief(annonce["slots"])
     pret = pret_pour_generation(brief) and not valider_brief(brief)
     assert pret == annonce["pret_attendu"], annonce["piege"]
+
+
+# --------------------------------------------------------------------------- #
+# Sources automatiques (D-010)
+# --------------------------------------------------------------------------- #
+def test_les_nouvelles_sources_sont_documentees():
+    """Toute valeur de `source` doit figurer dans le guide d'annotation."""
+    guide = (Path(__file__).parent.parent / "docs" / "guide_annotation.md").read_text(
+        encoding="utf-8")
+    for source in SOURCES:
+        assert f"`{source}`" in guide, f"{source} n'est pas documentee dans le guide"
+
+
+def test_les_sources_automatiques_sont_un_sous_ensemble():
+    assert SOURCES_AUTOMATIQUES <= SOURCES
+
+
+def test_aucune_annonce_humaine_n_est_marquee_automatique():
+    """Les 150 annonces de la Phase 0 sont ecrites par l'equipe ou a traduire :
+    aucune ne doit porter une source automatique."""
+    fautes = [(a["id"], a["source"]) for a in TOUT if a["source"] in SOURCES_AUTOMATIQUES]
+    assert not fautes, f"annonces marquees automatiques a tort : {fautes}"

@@ -35,12 +35,19 @@ Valeurs de `source` :
 | `ecrit_equipe` | texte écrit par l'équipe, en français |
 | `natif` | transcription d'une personne qui parle la langue |
 | `traduit_verifie` | traduit, puis relu par une personne qui parle la langue |
-| `traduit_non_verifie` | traduction automatique, pas encore relue |
+| `traduit_auto` | traduction automatique ayant **passé les contrôles de fidélité** (D-010) |
+| `traduit_non_verifie` | traduction automatique, sans aucun contrôle |
 | `a_traduire` | texte français en attente de traduction par un locuteur |
+| `synthese_vocale` | audio produit par un modèle de synthèse, pas par une voix humaine |
 
-`traduit_non_verifie` ne sert **jamais** à mesurer une performance : ces
-annonces sont exclues des jeux de validation et de test tant qu'un locuteur ne
-les a pas relues.
+`traduit_non_verifie`, `traduit_auto` et `synthese_vocale` ne servent **jamais**
+à mesurer une performance présentée comme réelle : ces annonces sont exclues des
+jeux de validation et de test tant qu'un locuteur ne les a pas relues.
+
+`traduit_auto` et `traduit_non_verifie` sont deux choses différentes. La
+première a survécu au contrôle de fidélité des informations critiques (chaque
+nombre, le lieu, le nom du commerce, et la retraduction qui redonne les mêmes
+valeurs normalisées). La seconde n'a été vérifiée par rien. Voir D-010.
 
 ### Exemple complet
 
