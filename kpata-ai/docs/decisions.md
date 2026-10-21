@@ -160,3 +160,29 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
 - **À trancher** : faut-il une liste de fêtes dans le code, pour que la
   normalisation fasse ce travail automatiquement plutôt que l'annotateur ? Cela
   relève de la Phase 2 (extraction assistée par modèle).
+
+## D-008 — Aucun texte écrit en Yorùbá ni en Hausa par l'équipe
+
+- **Date** : 21 octobre 2026
+- **Auteur** : Zozerigué (tâche D)
+- **Statut** : proposé
+- **Décision** : l'équipe n'écrit aucun texte en Yorùbá ni en Hausa, et ne
+  propose **aucune traduction automatique**, même marquée comme non vérifiée.
+  Les fichiers `a_traduire_yoruba.json` et `a_traduire_hausa.json` contiennent
+  le texte source en français (`transcript_source_fr`), les slots déjà annotés,
+  et un champ `transcript` laissé à `null` qu'un locuteur natif remplira. Le
+  champ `traducteur` recevra ses initiales.
+- **Raison** : aucun membre de l'équipe ne parle ces langues. Une traduction
+  fausse ne serait pas détectable par nous et contaminerait l'entraînement,
+  l'évaluation et les conclusions du projet — le cahier §9 exige de mesurer les
+  performances Yorùbá et Hausa séparément, ce qui n'a aucun sens sur des
+  données dont on ne peut pas garantir la langue.
+- **Choix de ne pas fournir de `proposition_auto`** : le prompt de mission
+  l'autorisait pour aider le locuteur. On s'en abstient, car une proposition
+  automatique ancre le traducteur sur une formulation peut-être fausse au lieu
+  de le laisser traduire librement — et le risque qu'elle soit recopiée sans
+  relecture est réel. À rediscuter avec l'équipe si les locuteurs la réclament.
+- **Conséquence** : les 100 annonces Yorùbá et Hausa ne sont pas utilisables
+  tant que la traduction n'est pas faite. Les tests ne vérifient aujourd'hui que
+  la cohérence de leurs slots, pas leur texte. C'est le point bloquant principal
+  de la Phase 0 : il faut trouver un locuteur Yorùbá et un locuteur Hausa.
