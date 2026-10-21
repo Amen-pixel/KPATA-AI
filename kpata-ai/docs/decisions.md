@@ -133,3 +133,30 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
 - **Raison** : le cahier des charges prime, mais il se contredit lui-même entre
   §4 et §6 sur les dates et le nom du support. Le choix retenu est celui qui
   rend la vérification du QA Agent possible.
+
+## D-007 — Informations sous-entendues : fêtes à date fixe seulement
+
+- **Date** : 21 octobre 2026
+- **Auteur** : Zozerigué (tâche C)
+- **Statut** : proposé
+- **Décision** : on n'écrit une information déduite que si elle est certaine,
+  vérifiable et indépendante de la personne.
+  - **Fêtes à date fixe : on écrit la date.** Saint-Valentin (14 février), Noël
+    (25 décembre), Nouvel An (1 janvier), fête du travail (1 mai).
+  - **Fêtes mobiles : `null`, toujours.** Pâques, Tabaski (Aïd el-Kébir),
+    Ramadan, Aïd el-Fitr.
+  - **Tout le reste reste `null`** : pas de ville ajoutée à un nom de marché,
+    pas de devise déduite du pays, pas de prix déduit de « prix cassés », pas de
+    date calendaire déduite de « ce week-end ».
+- **Raison** : une date de calendrier publique est identique chaque année, donc
+  l'écrire n'est pas un pari. Une fête mobile change de date : écrire une date
+  serait inventer une information, ce que la règle d'or interdit. La frontière
+  retenue est donc « est-ce vérifiable sans demander à la personne ? ».
+- **Conséquence sur l'existant** : l'annonce 16 de `briefs_fr.json`
+  (Saint-Valentin) était classée `evenement`. Elle passe en `promotion` : une
+  promotion à l'occasion d'une fête annonce la réduction, pas la fête. La date
+  du 14 février est conservée, conformément à la règle ci-dessus. Corrigé dans
+  `scripts/generer_briefs.py`.
+- **À trancher** : faut-il une liste de fêtes dans le code, pour que la
+  normalisation fasse ce travail automatiquement plutôt que l'annotateur ? Cela
+  relève de la Phase 2 (extraction assistée par modèle).
