@@ -41,6 +41,21 @@ Ne pas modifier à la main : relancer le script.
 
 > `a_traduire` : texte source en français, en attente d'un locuteur natif. Ces annonces ne sont pas utilisables pour mesurer une performance par langue.
 
+> `traduit_auto` et `synthese_vocale` : produits automatiquement (D-010). Elles ne servent **jamais** à mesurer une performance présentée comme réelle.
+
+### Par langue et par origine
+
+| Langue | a_traduire | ecrit_equipe | Total |
+| --- | --- | --- | --- |
+| francais | 0 | 50 | 50 |
+| hausa | 50 | 0 | 50 |
+| yoruba | 50 | 0 | 50 |
+
+
+### Traduction automatique
+
+_Pas encore lancée._ Voir `scripts/traduire_auto.py`.
+
 ---
 
 ## 2. Feu vert : calculé contre attendu

@@ -29,10 +29,17 @@ CRITIQUES = ["price", "promotion", "start_date", "phone", "location", "product",
 # --------------------------------------------------------------------------- #
 # Lecture
 # --------------------------------------------------------------------------- #
+# Fichiers de data/briefs/ qui ne sont PAS des annonces : ils ne doivent pas
+# entrer dans le bilan.
+PAS_DES_ANNONCES = {"rejets_traduction.json"}
+
+
 def charger():
     """Toutes les annonces de data/briefs/, avec le nom de leur fichier."""
     annonces = []
     for chemin in sorted(DOSSIER_BRIEFS.glob("*.json")):
+        if chemin.name in PAS_DES_ANNONCES:
+            continue
         for annonce in json.loads(chemin.read_text(encoding="utf-8")):
             annonces.append({**annonce, "_fichier": chemin.name})
     return annonces
@@ -92,6 +99,53 @@ def stats(valeurs):
     return (f"{min(valeurs):.2f}", f"{sum(valeurs) / len(valeurs):.2f}", f"{max(valeurs):.2f}")
 
 
+def _section_traduction_auto():
+    """Taux d'acceptation de la traduction automatique (tâche B, D-010).
+
+    Compte les annonces acceptées dans `briefs_<langue>_auto.json` et les
+    rejetées dans `rejets_traduction.json`. Si la traduction n'a pas encore été
+    lancée, la section le dit au lieu d'inventer des chiffres.
+    """
+    from kpata.controle_traduction import resumer
+
+    rejets_par_langue = defaultdict(list)
+    chemin_rejets = DOSSIER_BRIEFS / "rejets_traduction.json"
+    if chemin_rejets.exists():
+        for rejet in json.loads(chemin_rejets.read_text(encoding="utf-8")):
+            rejets_par_langue[rejet.get("langue")].append(rejet)
+
+    lignes, familles = [], []
+    for langue in ("yoruba", "hausa"):
+        accepte = DOSSIER_BRIEFS / f"briefs_{langue}_auto.json"
+        nb_ok = len(json.loads(accepte.read_text(encoding="utf-8"))) if accepte.exists() else 0
+        rejets = rejets_par_langue.get(langue, [])
+        total = nb_ok + len(rejets)
+        if total:
+            lignes.append([langue, total, nb_ok, len(rejets), f"{nb_ok / total:.0%}"])
+            familles += rejets
+
+    if not lignes:
+        return ["### Traduction automatique", "",
+                "_Pas encore lancée._ Voir `scripts/traduire_auto.py`.", ""]
+
+    parties = ["### Traduction automatique : taux d'acceptation", "",
+               tableau(["Langue", "Traduites", "Acceptées", "Rejetées", "Taux"], lignes),
+               ""]
+
+    sous_seuil = [l[0] for l in lignes if float(l[4].rstrip("%")) < 50]
+    if sous_seuil:
+        parties += [f"> **Taux sous 50 % pour : {', '.join(sous_seuil)}.** "
+                    "Les règles de contrôle n'ont pas été assouplies pour faire "
+                    "passer plus d'annonces : c'est un résultat scientifique en soi.",
+                    ""]
+
+    if familles:
+        parties += ["#### Raisons de rejet les plus fréquentes", "",
+                    tableau(["Raison", "Occurrences"],
+                            [[f, n] for f, n in resumer(familles)[:5]]), ""]
+    return parties
+
+
 def ecrire_rapport(resultats):
     total = len(resultats)
     parties = [
@@ -128,7 +182,24 @@ def ecrire_rapport(resultats):
                 "",
                 "> `a_traduire` : texte source en français, en attente d'un locuteur natif. "
                 "Ces annonces ne sont pas utilisables pour mesurer une performance par langue.",
-                "", "---", ""]
+                "",
+                "> `traduit_auto` et `synthese_vocale` : produits automatiquement "
+                "(D-010). Elles ne servent **jamais** à mesurer une performance "
+                "présentée comme réelle.",
+                ""]
+
+    # Croisement langue x source : c'est ce que D-010 exige de pouvoir lire.
+    croise_source = defaultdict(Counter)
+    for r in resultats:
+        croise_source[r["langue"]][r["source"]] += 1
+    sources = sorted(par_source)
+    parties += ["### Par langue et par origine", "",
+                tableau(["Langue"] + sources + ["Total"],
+                        [[lg] + [croise_source[lg][s] for s in sources]
+                         + [sum(croise_source[lg].values())] for lg in langues]), ""]
+
+    parties += _section_traduction_auto()
+    parties += ["---", ""]
 
     # 2. Feu vert
     prets = [r for r in resultats if r["pret"]]

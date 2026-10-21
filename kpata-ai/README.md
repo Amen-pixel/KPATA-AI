@@ -44,6 +44,7 @@ pytest                           # tout doit être vert
 | `docs/schema_annonce.md` | **La référence.** Les champs d'un brief, leur forme normalisée, leur poids, la règle du feu vert. |
 | `docs/guide_annotation.md` | Comment annoter une annonce, pour que les trois annotent pareil. |
 | `docs/decisions.md` | Toutes les décisions de conception, avec leur raison et leur statut. |
+| `docs/fiche_donnees.md` | Chaque source de données : volume, **licence**, contrôle, limites. |
 | `docs/bilan_phase0.md` | L'état du jeu de données et du moteur. Généré, ne pas modifier à la main. |
 
 ## Scripts
@@ -56,6 +57,27 @@ python scripts/bilan_phase0.py          # réécrit docs/bilan_phase0.md
 
 Après avoir modifié une annonce, relancer le script correspondant **et**
 `scripts/bilan_phase0.py`, puis `pytest`.
+
+### Scripts qui ont besoin d'un modèle (Phase 1)
+
+Ceux-ci demandent les bibliothèques lourdes, installées séparément :
+
+```bash
+pip install -r requirements-phase1.txt
+
+python scripts/traduire_auto.py            # traduit vers le Yorùbá et le Hausa (NLLB-200)
+python scripts/synthese_vocale.py          # génère les audios (MMS-TTS)
+python scripts/echantillon_verification.py # tire 20 annonces à faire relire
+python scripts/resultats_verification.py   # lit les fichiers remplis par le relecteur
+```
+
+Le paquet `kpata` et `pytest` fonctionnent **sans** ces bibliothèques. Les tests
+ne téléchargent jamais de modèle.
+
+> **Attention aux licences.** NLLB-200 et MMS-TTS sont en **CC-BY-NC 4.0**, donc
+> usage **non commercial**. Acceptable pour un projet d'école, mais cela
+> interdit toute exploitation commerciale de Kpata AI entraîné sur ces données.
+> Détail dans `docs/fiche_donnees.md`.
 
 ## Règles de travail
 
