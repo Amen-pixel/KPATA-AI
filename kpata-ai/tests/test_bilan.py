@@ -79,3 +79,31 @@ def test_le_rapport_du_depot_est_a_jour():
     assert f"**{len(RESULTATS)} annonces analysées**" in texte, (
         "le rapport n'est plus a jour : relancer scripts/bilan_phase0.py"
     )
+
+
+# --------------------------------------------------------------------------- #
+# Sources automatiques dans le bilan (tache E, D-010)
+# --------------------------------------------------------------------------- #
+def test_le_bilan_ignore_les_fichiers_qui_ne_sont_pas_des_annonces():
+    """rejets_traduction.json vit dans data/briefs/ mais n'est pas un lot
+    d'annonces : il ne doit pas entrer dans les comptages."""
+    assert "rejets_traduction.json" in BILAN.PAS_DES_ANNONCES
+    fichiers = {r["fichier"] for r in RESULTATS}
+    assert not (fichiers & BILAN.PAS_DES_ANNONCES)
+
+
+def test_le_bilan_croise_langue_et_origine(tmp_path, monkeypatch):
+    """D-010 exige de pouvoir lire les volumes par langue ET par source."""
+    rapport = tmp_path / "bilan.md"
+    monkeypatch.setattr(BILAN, "RAPPORT", rapport)
+    BILAN.ecrire_rapport(RESULTATS)
+    texte = rapport.read_text(encoding="utf-8")
+    assert "Par langue et par origine" in texte
+
+
+def test_la_section_traduction_auto_ne_plante_pas_sans_donnees():
+    """Avant le premier lancement de traduire_auto.py, la section doit le dire
+    au lieu d'inventer des chiffres."""
+    parties = BILAN._section_traduction_auto()
+    assert parties, "la section doit toujours exister"
+    assert any("Traduction automatique" in p for p in parties)
