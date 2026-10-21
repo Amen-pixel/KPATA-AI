@@ -163,6 +163,14 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
 
 ## D-008 — Aucun texte écrit en Yorùbá ni en Hausa par l'équipe
 
+> **RÉVISÉE le 21 octobre 2026 par D-010.** Aucun locuteur n'a été trouvé, et
+> appliquer cette décision à la lettre laissait le projet sans aucune donnée
+> dans ses langues cibles. La traduction automatique est désormais autorisée,
+> mais **uniquement sous contrôle de fidélité** et marquée `traduit_auto`.
+> Ce qui reste valable de D-008 : l'équipe n'écrit toujours aucun texte en
+> Yorùbá ni en Hausa de sa propre main, et aucune traduction non contrôlée
+> n'entre dans le jeu de données.
+
 - **Date** : 21 octobre 2026
 - **Auteur** : Zozerigué (tâche D)
 - **Statut** : proposé
@@ -216,3 +224,83 @@ doute, le code renvoie `None` et c'est la validation qui refuse.
   sur `main`. Leçon pour la suite : sur une pile de PR, rebasculer les bases sur
   `main` **avant** de fusionner, et ne pas supprimer les branches tant que la
   pile n'est pas entièrement fusionnée.
+
+## D-010 — Construire les données Yorùbá et Hausa sans locuteur humain
+
+- **Date** : 21 octobre 2026
+- **Auteur** : Zozerigué, sur décision de l'équipe
+- **Statut** : proposé
+
+### Constat
+
+L'équipe n'a trouvé **aucun locuteur Yorùbá ni Hausa** pour traduire et
+enregistrer les 100 annonces préparées à la tâche D de la Phase 0. La décision
+D-008 interdisait toute traduction automatique : elle est **révisée ici**, parce
+que son application stricte laisse le projet sans aucune donnée dans ses langues
+cibles, ce qui est pire.
+
+### Plan retenu
+
+1. **Traduction automatique contrôlée** (tâche B). NLLB-200 distillé 600M
+   traduit le français vers le Yorùbá et le Hausa, puis retraduit vers le
+   français. Une annonce n'est acceptée que si les informations critiques
+   survivent au double passage : chaque nombre (téléphone, prix, pourcentage,
+   jour) doit apparaître à l'identique, le lieu et le nom du commerce doivent
+   être conservés, et la retraduction doit redonner les mêmes valeurs
+   normalisées. Toute annonce qui échoue est **rejetée, jamais corrigée à la
+   main**.
+2. **Voix de synthèse** (tâche C). MMS-TTS lit les traductions acceptées et
+   produit des WAV mono 16 kHz, avec `SYNTH` comme identifiant de locuteur.
+3. **Voix réelles pour évaluer la transcription**. Les corpus publics Common
+   Voice et FLEURS fournissent de vrais enregistrements en Yorùbá et en Hausa.
+   C'est la collecte d'Amen ; une note lui est adressée
+   (`docs/note_pour_amen.md`) pour proposer d'ajouter FLEURS.
+4. **Vérification humaine d'un échantillon** (tâche D). Un protocole prêt à
+   l'emploi permet à un relecteur, s'il s'en présente un jour, de mesurer la
+   qualité de 20 annonces par langue en une heure.
+
+### Limites, dites franchement
+
+- **Les voix de synthèse sont plus propres qu'un vrai commerçant.** Pas de
+  bruit de marché, pas d'hésitation, pas d'accent régional, débit régulier. Tout
+  score de transcription obtenu sur ces audios sera **trop optimiste** et ne
+  prédit pas la performance en situation réelle.
+- **La séparation des données par locuteur n'a aucun sens sur la synthèse.** Il
+  n'y a qu'une seule voix par langue. Les splits par locuteur exigés au §6 du
+  cahier des charges ne sont possibles que sur les voix réelles (Common Voice,
+  FLEURS).
+- **La traduction automatique peut produire un Yorùbá ou un Hausa peu naturel.**
+  Le contrôle vérifie que les informations critiques sont préservées, pas que la
+  phrase est bien tournée. Une traduction peut passer tous les contrôles et
+  rester maladroite, voire incompréhensible pour un locuteur. Seule la tâche D
+  peut le mesurer.
+- **Personne dans l'équipe ne peut relire ces textes.** C'est la limite qui
+  englobe toutes les autres.
+
+### Impact sur l'évaluation
+
+Tout résultat du projet sera donné **séparément par langue et par origine des
+données** : réelle ou synthétique. Un score global mélangeant les deux n'a pas
+de sens et ne sera pas publié. Cette séparation est plus exigeante que le §9 du
+cahier des charges, qui demande seulement de distinguer Yorùbá et Hausa.
+
+### Deux nouvelles valeurs pour le champ `source`
+
+- `traduit_auto` : traduction automatique ayant **passé les contrôles** de
+  fidélité de la tâche B. Distinct de `traduit_non_verifie`, qui désigne une
+  traduction automatique sans aucun contrôle.
+- `synthese_vocale` : audio produit par un modèle de synthèse, pas par une voix
+  humaine.
+
+Ces deux valeurs ne servent **jamais** à mesurer une performance présentée comme
+réelle. Elles sont utilisables pour développer et déboguer la chaîne de
+traitement.
+
+### Licences
+
+NLLB-200 et MMS-TTS sont tous deux sous licence **CC-BY-NC 4.0**, donc
+**non commerciale**. C'est acceptable pour un projet d'école, mais cela interdit
+toute exploitation commerciale de Kpata AI entraîné sur ces données. Le cahier
+des charges demande explicitement de vérifier les licences avant réutilisation
+commerciale : c'est fait, et c'est bloquant pour un usage commercial. Détail
+dans `docs/fiche_donnees.md`.
