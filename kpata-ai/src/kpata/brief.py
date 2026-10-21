@@ -10,12 +10,13 @@ MEDIAS = ["poster_whatsapp", "poster_portrait", "statut_whatsapp", "texte_public
 CHAMPS = ["language", "intent", "business_name", "business_type", "product",
           "promotion",   # la réduction : "-20 %" ou "-10000 F"
           "price",       # un prix affiché : 2500
+          "currency",    # devise du prix : "XOF" (franc CFA) ou "NGN" (naira)
           "start_date", "end_date", "location", "phone", "tone", "requested_media"]
 
 # Poids : plus un champ compte sur l'affiche, plus il pèse dans le score C
 POIDS = {"phone": 3, "product": 3, "promotion": 3, "price": 3, "location": 2,
          "business_name": 2, "start_date": 2, "business_type": 1, "end_date": 1,
-         "tone": 1, "requested_media": 1}
+         "tone": 1, "requested_media": 1, "currency": 1}
 
 # Champs OBLIGATOIRES selon l'intention. Un tuple = "au moins un des deux".
 BASE = ["location", "phone"]
