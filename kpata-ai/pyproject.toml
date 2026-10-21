@@ -15,3 +15,9 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+# Les tests « slow » téléchargent un vrai modèle (plusieurs Go) : ils ne
+# tournent pas par défaut. Pour les lancer : pytest -m slow
+addopts = "-m 'not slow'"
+markers = [
+    "slow: a besoin d'un vrai modele (telechargement). Exclu par defaut.",
+]

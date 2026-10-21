@@ -1,0 +1,19 @@
+# Phase 1 : bibliothèques lourdes, installées séparément.
+#
+# Le paquet `kpata` et les tests de base n'en ont PAS besoin : ils tournent avec
+# la seule bibliothèque standard. N'installe ce fichier que pour lancer les
+# scripts de traduction automatique et de synthèse vocale.
+#
+#     pip install -r requirements-phase1.txt
+#
+# Attention aux licences : NLLB-200 et MMS-TTS sont en CC-BY-NC 4.0, donc
+# usage NON commercial. Voir docs/fiche_donnees.md.
+
+# Traduction automatique (NLLB-200) et synthèse vocale (MMS-TTS)
+torch>=2.0                 # version processeur suffisante : --index-url https://download.pytorch.org/whl/cpu
+transformers>=4.33
+sentencepiece              # tokeniseur de NLLB
+
+# Écriture des fichiers audio
+soundfile
+scipy
