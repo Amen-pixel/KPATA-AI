@@ -136,6 +136,10 @@ braderie, défilé, fête organisée par le commerce.
 - « Journée portes ouvertes samedi dans mon centre de formation. »
 - « Grande braderie dimanche au marché. »
 
+Renseigner `event_name` avec le nom de la manifestation (par exemple
+`"Journée portes ouvertes"` ou `"Grande braderie"`). Ce champ et `start_date`
+sont obligatoires pour obtenir le feu vert.
+
 > **Attention.** Une promotion *à l'occasion* d'une fête n'est pas un
 > `evenement`. « Pour la Saint-Valentin, moins 20 % sur les bouquets » est une
 > `promotion` : ce qui est annoncé est la réduction, la fête n'est que le

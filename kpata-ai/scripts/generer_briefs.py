@@ -56,13 +56,13 @@ B = [
 B2 = [
  # --- evenement (le lot 1 n'en avait plus après reclassement de l'annonce 16) ---
  ("evenement", "Journée portes ouvertes samedi dans mon centre de formation à Akpakpa, Cotonou. Appelez le 0197404040.",
-  s(business_type="centre de formation", location="Akpakpa, Cotonou", phone="0197404040", start_date="samedi"), True, "evenement sans produit ni prix : accepté, seule la date est obligatoire"),
+  s(business_type="centre de formation", event_name="Journée portes ouvertes", location="Akpakpa, Cotonou", phone="0197404040", start_date="samedi"), True, "événement sans produit ni prix : son nom et sa date sont obligatoires"),
  ("evenement", "Grande braderie dimanche au marché de Kano. Mon numéro, 08123456789.",
-  s(business_type="commerce de marché", location="Kano", phone="08123456789", start_date="dimanche"), True, "numéro nigérian à 11 chiffres commençant par 081"),
+  s(business_type="commerce de marché", event_name="Grande braderie", location="Kano", phone="08123456789", start_date="dimanche"), True, "numéro nigérian à 11 chiffres commençant par 081"),
  ("evenement", "On organise un défilé de mode le 14 mars à Ibadan. Contact : +234 802 777 8899.",
-  s(business_type="atelier de couture", product="défilé de mode", location="Ibadan", phone="+234 802 777 8899", start_date="14 mars"), True, "numéro +234 avec espaces"),
+  s(business_type="atelier de couture", product="défilé de mode", event_name="Défilé de mode", location="Ibadan", phone="+234 802 777 8899", start_date="14 mars"), True, "numéro +234 avec espaces"),
  ("evenement", "Portes ouvertes à mon école de couture à Niamey, le 5 décembre. Téléphone 96 55 44 33.",
-  s(business_type="école de couture", location="Niamey", phone="96 55 44 33", start_date="5 décembre"), True, "8 chiffres + lieu nigérien : doit donner +227 et non +229"),
+  s(business_type="école de couture", event_name="Portes ouvertes", location="Niamey", phone="96 55 44 33", start_date="5 décembre"), True, "8 chiffres + lieu nigérien : doit donner +227 et non +229"),
  ("evenement", "Il y a une fête chez moi à Maradi, venez nombreux. Mon numéro 90 11 22 33.",
   s(business_type="commerce", location="Maradi", phone="90 11 22 33"), False, "date manquante : obligatoire pour un evenement"),
  ("evenement", "Journée promotionnelle le 30 février à Porto-Novo. 0197888111.",
