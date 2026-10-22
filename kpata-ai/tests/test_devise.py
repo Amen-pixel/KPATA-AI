@@ -1,7 +1,7 @@
 """Le champ currency (tache A2) : schema, validation, coherence."""
 import pytest
 
-from kpata.brief import CHAMPS, POIDS, nouveau_brief
+from kpata.schema import CHAMPS, POIDS, nouveau_brief
 from kpata.normalisation import DEVISES
 from kpata.validation import valider_brief
 

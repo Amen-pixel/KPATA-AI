@@ -15,3 +15,9 @@ def test_brief_invalide_signale_chaque_champ():
 
 def test_champ_absent_nest_pas_invalide():
     assert valider_brief({"intent": "promotion"}) == {}
+
+
+def test_nom_evenement_trop_court_est_invalide():
+    assert valider_brief({"event_name": "x"}) == {
+        "event_name": "nom de l'événement trop court"
+    }

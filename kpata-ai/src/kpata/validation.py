@@ -1,5 +1,5 @@
 # Kpata AI - Phase 0 : règles de validation des champs
-from .brief import INTENTS, TONS, MEDIAS
+from .schema import INTENTS, TONS, MEDIAS
 from .normalisation import (DEVISES, normaliser_telephone, normaliser_prix,
                             normaliser_promotion, normaliser_date, normaliser_langue)
 
@@ -14,6 +14,7 @@ REGLES = {
     "intent":        (lambda v: v in INTENTS, "type de demande inconnu"),
     "business_name": (texte_min(2), "nom du commerce trop court"),
     "business_type": (texte_min(3), "type de commerce trop court"),
+    "event_name":   (texte_min(2), "nom de l'événement trop court"),
     "product":       (texte_min(2), "produit trop court"),
     "promotion":     (lambda v: normaliser_promotion(v) is not None, "réduction invalide (ex : 20 % ou 10 000 F)"),
     "price":         (lambda v: (isinstance(v, int) and v > 0) or normaliser_prix(v, champ="price") is not None, "prix invalide"),

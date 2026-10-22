@@ -2,7 +2,7 @@
 # Format et règles d'annotation : docs/guide_annotation.md
 import json
 
-from kpata.brief import nouveau_brief as s
+from kpata.schema import nouveau_brief as s
 
 # Lot 1 : 20 annonces écrites par Amen.
 # (intent, ce que dit la personne, champs extraits, prêt attendu ?, piège)

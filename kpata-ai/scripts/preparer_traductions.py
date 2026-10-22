@@ -10,7 +10,7 @@
 # 50 annonces chacun.
 import json
 
-from kpata.brief import nouveau_brief as s
+from kpata.schema import nouveau_brief as s
 
 # --------------------------------------------------------------------------- #
 # Contexte par langue

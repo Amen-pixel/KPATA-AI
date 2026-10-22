@@ -28,7 +28,9 @@ pytest                           # tout doit être vert
 | Dossier | Contenu | Propriétaire |
 | --- | --- | --- |
 | `src/kpata/normalisation.py`, `validation.py` | normalisation et validation (téléphone, prix, devise, dates, périodes, pourcentages) | Amen |
-| `src/kpata/brief.py` | schéma du brief, moteur de complétude | constantes tenues par Zozerigué, logique à reprendre par Eudes |
+| `src/kpata/schema.py` | schéma du brief, champs et règles par intention |
+| `src/kpata/completude.py` | calcul du score, champs manquants et feu vert |
+| `src/kpata/generation_texte.py` | génération publicitaire en français par modèles | Eudes |
 | `tests/` | tests automatiques (`pytest`) | celui qui écrit le code |
 | `data/briefs/` | annonces d'exemple annotées (fichiers JSON, légers) | les trois |
 | `data/audio/` | enregistrements : **jamais sur GitHub**, uniquement dans le dossier partagé (Drive) | Amen |
@@ -53,10 +55,19 @@ pytest                           # tout doit être vert
 python scripts/generer_briefs.py        # réécrit data/briefs/briefs_fr.json (50 annonces)
 python scripts/preparer_traductions.py  # réécrit les 2 fichiers à faire traduire (50 + 50)
 python scripts/bilan_phase0.py          # réécrit docs/bilan_phase0.md
+python scripts/tester_brief_interactif.py # tester un brief saisi au clavier
 ```
 
 Après avoir modifié une annonce, relancer le script correspondant **et**
 `scripts/bilan_phase0.py`, puis `pytest`.
+
+### Générer un texte publicitaire
+
+`kpata.generation_texte.generer_texte_publicitaire(brief)` produit un texte en
+français à partir des slots. Le brief est normalisé et validé avant génération ;
+un brief incomplet ou invalide déclenche une `ValueError`. Le générateur utilise
+des modèles déterministes et n'ajoute pas de prix, de devise, de date ou de
+coordonnée absents du brief.
 
 ### Scripts qui ont besoin d'un modèle (Phase 1)
 

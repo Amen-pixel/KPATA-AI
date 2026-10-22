@@ -9,8 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from kpata.brief import INTENTS, pret_pour_generation
+from kpata.completude import pret_pour_generation
 from kpata.normalisation import normaliser_brief
+from kpata.schema import INTENTS
 from kpata.validation import valider_brief
 
 DOSSIER = Path(__file__).parent.parent / "data" / "briefs"
