@@ -94,3 +94,18 @@ def test_brief_sans_devise_najoute_rien():
 def test_brief_najoute_pas_une_devise_par_dessus_une_autre():
     brief = normaliser_brief({"price": "5000 F", "currency": "NGN"})
     assert brief["currency"] == "NGN"
+
+
+@pytest.mark.parametrize("texte", ["rendez-vous en 2026", "bref 20 modèles", "bien 5 modèles"])
+def test_lettre_au_bout_d_un_mot_n_est_pas_un_symbole_de_devise(texte):
+    assert normaliser_prix(texte) is None
+    assert detecter_devise(texte) is None
+
+
+@pytest.mark.parametrize("texte, prix, devise", [
+    ("N5000", 5000, "NGN"), ("N 5000", 5000, "NGN"), ("₦5000", 5000, "NGN"),
+    ("f 5000", 5000, "XOF"), ("chaussures N5000", 5000, "NGN"),
+])
+def test_vrais_symboles_restent_reconnus(texte, prix, devise):
+    assert normaliser_prix(texte) == prix
+    assert detecter_devise(texte) == devise
