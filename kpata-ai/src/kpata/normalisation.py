@@ -113,8 +113,8 @@ def normaliser_telephone(texte, pays=None):
 # Deux positions : l'unité après le nombre ('5000 F') ou avant ('₦5000', 'N5000').
 # Le symbole '₦' n'est pas un caractère de mot : il ne peut pas porter de \b.
 UNITES_DEVISE = {
-    "XOF": {"suffixe": r"(?:fcfa|cfa|francs?|f)\b", "prefixe": r"(?:fcfa|cfa|f)(?=\s*\d)"},
-    "NGN": {"suffixe": r"(?:nairas?)\b|₦", "prefixe": r"₦|n(?=\s*\d)"},
+        "XOF": {"suffixe": r"(?:fcfa|cfa|francs?|f)\b", "prefixe": r"(?<![a-z])(?:fcfa|cfa|f)(?=\s*\d)"},
+    "NGN": {"suffixe": r"(?:nairas?)\b|₦", "prefixe": r"₦|(?<![a-z])n(?=\s*\d)"},
 }
 MULTIPLICATEURS = {"mille": 1000, "millier": 1000, "milliers": 1000}
 DEVISES = ("XOF", "NGN")
