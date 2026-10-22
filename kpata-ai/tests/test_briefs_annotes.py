@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import pytest
-from kpata.brief import pret_pour_generation
+from kpata.completude import pret_pour_generation
 from kpata.normalisation import normaliser_brief
 from kpata.validation import valider_brief
 

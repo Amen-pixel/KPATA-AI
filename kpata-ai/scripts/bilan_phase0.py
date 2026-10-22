@@ -13,9 +13,10 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-from kpata.brief import (CHAMPS, INTENTS, POIDS, SEUIL, champs_manquants, completude,
-                         pret_pour_generation)
+from kpata.completude import (SEUIL, champs_manquants, completude,
+                              pret_pour_generation)
 from kpata.normalisation import NORMALISEURS, normaliser_brief
+from kpata.schema import CHAMPS, INTENTS, POIDS
 from kpata.validation import valider_brief
 
 RACINE = Path(__file__).parent.parent

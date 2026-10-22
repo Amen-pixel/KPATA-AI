@@ -1,4 +1,4 @@
-# Schéma de l'annonce Kpata AI
+ # Schéma de l'annonce Kpata AI
 
 Document de référence de la Phase 0. Il fixe les champs d'un brief, leur forme
 normalisée, leur poids dans le score de complétude et les conditions du feu
@@ -33,7 +33,7 @@ champs ne sont pas tous de même nature. On distingue donc deux niveaux.
 
 **Les slots** forment le brief proprement dit : c'est ce que le moteur de
 complétude évalue et ce que les agents de génération consomment. C'est la liste
-`CHAMPS` de `src/kpata/brief.py`, détaillée ci-dessous.
+`CHAMPS` de `src/kpata/schema.py`, détaillée ci-dessous.
 
 En Phase 0 les annonces sont écrites à la main : `audio_path` est vide. Il
 devient obligatoire en Phase 1, quand la Kpata Data Factory traitera de vrais
@@ -41,15 +41,17 @@ enregistrements.
 
 ## 2. Les champs du brief (slots)
 
-Poids = contribution au score C. « Obligatoire pour » = intentions qui ne
+Poids de référence = valeur par défaut ; le poids réellement appliqué dépend de
+l'intention (matrice au §5). « Obligatoire pour » = intentions qui ne
 peuvent pas obtenir le feu vert sans ce champ. `A ou B` signifie « au moins un
 des deux ».
 
-| Champ | Définition | Forme normalisée | Poids | Obligatoire pour |
+| Champ | Définition | Forme normalisée | Poids de référence | Obligatoire pour |
 | --- | --- | --- | --- | --- |
 | `language` | langue de la note vocale | `yoruba`, `hausa`, `francais` | — | toutes |
 | `intent` | ce que la personne veut annoncer | une des 7 intentions du §3 | — | toutes |
 | `product` | le produit ou le service dont on parle | texte, 2 caractères minimum | 3 | promotion, offre_limitee, lancement, restock, annonce_service |
+| `event_name` | nom ou intitulé de la manifestation annoncée | texte, 2 caractères minimum | 3 | evenement |
 | `phone` | numéro de contact | `+229` / `+234` / `+227` suivi du numéro national | 3 | toutes |
 | `promotion` | la réduction annoncée | `-20 %` ou `-10000 F` ou `-10000 ₦` | 3 | promotion, offre_limitee (`promotion ou price`) |
 | `price` | un prix affiché | entier positif, ex. `2500` | 3 | promotion, offre_limitee (`promotion ou price`) |
@@ -131,80 +133,73 @@ $$C = \frac{\sum_i w_i \cdot \mathbf{1}(\text{field}_i \text{ présent})}{\sum_i
 
 Concrètement : on additionne les poids des champs utiles **qui sont remplis**, on
 divise par la somme des poids de **tous** les champs utiles. Les champs utiles
-sont les champs obligatoires de l'intention, plus les champs souhaités. Un champ
-qui ne concerne pas l'intention ne compte ni au numérateur ni au dénominateur.
+sont les champs obligatoires de l'intention et les champs de poids positif dans
+sa matrice. Un champ qui ne concerne pas l'intention ne compte ni au numérateur
+ni au dénominateur.
 
 Pour un groupe `A ou B`, le groupe compte une seule fois, avec le poids le plus
-élevé des deux, et il est satisfait dès que l'un des deux champs est rempli.
+élevé des deux pour l'intention considérée, et il est satisfait dès que l'un
+des deux champs est rempli. Un champ dont le poids est nul pour une intention
+est exclu du score. Seuls les champs facultatifs présents dans la matrice avec
+un poids positif comptent pour l'intention considérée.
 
 C mesure la **richesse** du brief, pas sa justesse. Un brief peut avoir un C
 élevé et contenir un prix faux : c'est la validation et le QA Agent (§12) qui
 traitent la justesse. Il ne faut donc pas attendre du seuil qu'il protège de la
 règle d'or.
 
-## 5. Justification des poids et du seuil
+### Application dans le code
 
-### Les poids
+`src/kpata/schema.py` définit les champs (`CHAMPS`), intentions, poids et règles
+obligatoires par intention. `src/kpata/completude.py` implémente séparément
+`champs_manquants`, `completude` et `pret_pour_generation` avec le seuil du feu
+vert. Le feu vert ne remplace pas la validation des valeurs, assurée par
+`valider_brief`. `src/kpata/brief.py` conserve des imports de compatibilité pour
+les anciens appelants.
 
-Le principe retenu : **le poids d'un champ suit sa criticité pour le QA Agent**,
-pas sa simple présence sur l'affiche. Le §12 énumère ce que le QA vérifie — prix,
-réduction, dates, téléphone, lieu. Ce sont ces champs qui font échouer une
-campagne quand ils sont faux ou absents. Les sept champs prioritaires du §7.2
-(prix, réduction, date, numéro, localisation, produit, nom commercial) servent de
-seconde référence.
+Après ce feu vert et la validation, `src/kpata/generation_texte.py` fournit
+`generer_texte_publicitaire(brief)`. Ce générateur par modèles produit une
+annonce française pour les sept intentions. Il refuse un brief incomplet,
+invalide ou contenant un champ inconnu ; il n'invente pas de données manquantes.
+Les textes générés nécessitent encore une vérification humaine avant publication.
 
-Trois barèmes ont été testés sur les 20 annonces de `briefs_fr.json`. Le test
-compare le feu vert calculé au `pret_attendu` annoté.
+## 5. Poids par intention et seuil
 
-| Barème | C moyen | Accords à 0,5 | Accords à 0,6 | Accords à 0,7 |
-| --- | --- | --- | --- | --- |
-| A — poids d'origine (`location` 2, `business_name` 2) | 0,63 | 20/20 | 16/20 | 13/20 |
-| B — §7.2 strict (les 7 prioritaires à 3) | 0,61 | 20/20 | 14/20 | 13/20 |
-| **C — `location` 3, `business_name` 1** | 0,68 | **20/20** | **20/20** | 13/20 |
+Les poids de référence sont modulés par intention pour que le score reflète les
+informations réellement utiles à l'annonce. `phone` et `location` restent à 3
+pour toutes les intentions. Un champ absent de la liste d'une intention a un
+poids nul et ne compte ni au numérateur ni au dénominateur.
 
-**Barème retenu : C.** Deux changements par rapport à l'origine :
+| Intention | Poids positifs (champ : poids) |
+| --- | --- |
+| `promotion` | `phone: 3`, `location: 3`, `product: 3`, `promotion: 3`, `price: 3`, `start_date: 2`, `end_date: 1`, `business_name: 1`, `business_type: 1`, `currency: 1`, `tone: 1`, `requested_media: 1` |
+| `offre_limitee` | `phone: 3`, `location: 3`, `product: 3`, `promotion: 3`, `price: 3`, `start_date: 3`, `end_date: 2`, `business_name: 1`, `business_type: 1`, `currency: 1`, `tone: 1`, `requested_media: 1` |
+| `lancement` | `phone: 3`, `location: 3`, `product: 3`, `price: 2`, `start_date: 2`, `business_name: 1`, `business_type: 1`, `currency: 1`, `tone: 1`, `requested_media: 1` |
+| `ouverture` | `phone: 3`, `location: 3`, `business_name: 3`, `business_type: 3`, `start_date: 2`, `end_date: 1`, `tone: 1`, `requested_media: 1` |
+| `evenement` | `phone: 3`, `location: 3`, `event_name: 3`, `start_date: 3`, `end_date: 2`, `business_name: 1`, `business_type: 1`, `tone: 1`, `requested_media: 1` |
+| `restock` | `phone: 3`, `location: 3`, `product: 3`, `price: 2`, `business_name: 1`, `business_type: 1`, `currency: 1`, `tone: 1`, `requested_media: 1` |
+| `annonce_service` | `phone: 3`, `location: 3`, `product: 3`, `business_type: 2`, `business_name: 1`, `price: 1`, `currency: 1`, `tone: 1`, `requested_media: 1` |
 
-- `location` passe de 2 à 3. Le lieu est vérifié par le QA Agent (§12 « lieu
-  exact ») et il est obligatoire pour les sept intentions : une affiche sans lieu
-  n'est pas actionnable. Il mérite le même poids que le téléphone.
-- `business_name` passe de 2 à 1. C'est un nom propre, donc une information
-  fragile à l'ASR, et le §12 ne le vérifie pas. Il est souvent absent des notes
-  vocales réelles sans que la campagne en souffre : `business_type` suffit à
-  rédiger l'affiche.
+Ce barème est une proposition fondée sur le contenu nécessaire pour rédiger
+chaque type d'annonce. Pour un événement, le nom et la date sont prioritaires ;
+pour un restock, le produit est central et la date de l'événement n'est pas
+pertinente. Le seuil en vigueur reste `0,5` et devra être réévalué avec les
+annotations enrichies.
 
 ### Le seuil
 
-Le seuil d'origine est 0,5. Les mesures montrent qu'il n'y a **aucun faux
-positif à aucun seuil testé, avec aucun barème** : jamais une annonce incomplète
-n'obtient le feu vert à cause d'un seuil trop bas. Les quatre refus attendus
-(annonces 4, 11, 13, 20) le sont pour champ obligatoire manquant, et deux autres
-(14, 15) pour valeur invalide. Le seuil ne décide dans aucun cas.
-
-Autrement dit : **monter le seuil ne rend pas le système plus sûr, il bloque des
-annonces légitimes.** Avec le barème d'origine, un seuil de 0,6 refuse quatre
-annonces complètes et publiables (6, 7, 9, 12) — par exemple un restock avec
-produit, lieu et téléphone, qui n'a aucune raison d'être bloqué.
-
-Le barème C change la donne : il garde 20/20 à 0,5 **et** à 0,6.
-
-> **Proposition — à valider par l'équipe : seuil 0,6 avec le barème C.**
->
-> Raison : c'est la seule combinaison qui offre une marge de sécurité sans
-> refuser une seule annonce légitime. Un brief qui n'atteint pas 0,6 est pauvre
-> au point qu'une question de clarification est plus utile qu'une affiche.
->
-> Réserve : 20 annonces sont trop peu pour trancher définitivement. La décision
-> doit être réexaminée sur les 150 annonces de la tâche D, puis sur de vraies
-> transcriptions en Phase 1, où l'ASR fera manquer des champs que l'annotation
-> manuelle capture sans peine.
+Le seuil en vigueur demeure `0,5`. Les mesures précédentes portaient sur un
+barème unique et ne valident pas cette nouvelle matrice. Le seuil devra être
+réévalué après mise à jour des annotations concernées, puis sur des
+transcriptions réelles.
 
 Le code et ce document doivent rester alignés : `tests/test_schema_aligne.py`
 vérifie cette correspondance et échoue si l'un des deux change sans l'autre.
 
 ## 6. Questions ouvertes pour l'équipe
 
-1. **Seuil et poids** : valider le barème C et le seuil 0,6, ou garder 0,5 en
-   attendant les 150 annonces de la tâche D ?
+1. **Seuil et poids par intention** : valider ou ajuster la matrice proposée
+   après réalignement des annotations, puis réévaluer le seuil sur les 150 annonces.
 2. **`currency` obligatoire avec un prix ?** Cohérent avec la règle d'or, mais
    cela bloquerait les briefs dont le prix est un nombre seul, sans unité. Non
    obligatoire en Phase 0 ; à revoir en Phase 1 (D-003).

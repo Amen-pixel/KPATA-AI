@@ -9,7 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from kpata.brief import CHAMPS, INTENTS, MEDIAS, OBLIGATOIRES, POIDS, SEUIL, TONS
+from kpata.completude import SEUIL
+from kpata.schema import (CHAMPS, INTENTS, MEDIAS, OBLIGATOIRES, POIDS,
+                          POIDS_PAR_INTENTION, TONS)
 
 DOC = Path(__file__).parent.parent / "docs" / "schema_annonce.md"
 TEXTE = DOC.read_text(encoding="utf-8")
@@ -51,6 +53,34 @@ def test_aucun_poids_orphelin():
     assert set(POIDS) <= set(CHAMPS)
 
 
+def lignes_du_tableau_poids_par_intention():
+    lignes = {}
+    for ligne in TEXTE.splitlines():
+        cellules = [c.strip() for c in ligne.split("|")[1:-1]]
+        if len(cellules) != 2 or not cellules[0].startswith("`"):
+            continue
+        intent = cellules[0].strip("`")
+        if intent in INTENTS:
+            lignes[intent] = {
+                champ: int(poids)
+                for champ, poids in re.findall(r"([a-z_]+):\s*(\d+)", cellules[1])
+            }
+    return lignes
+
+
+def test_poids_par_intention_sont_documentes_et_alignes():
+    assert lignes_du_tableau_poids_par_intention() == POIDS_PAR_INTENTION
+    assert set(POIDS_PAR_INTENTION) == set(INTENTS)
+    for intent, poids in POIDS_PAR_INTENTION.items():
+        assert set(poids) <= set(CHAMPS), f"champ inconnu dans les poids de {intent}"
+        assert all(1 <= valeur <= 3 for valeur in poids.values())
+        champs_requis = {
+            champ for item in OBLIGATOIRES[intent]
+            for champ in ((item,) if isinstance(item, str) else item)
+        }
+        assert champs_requis <= set(poids), f"champ obligatoire sans poids pour {intent}"
+
+
 def test_les_sept_intentions_sont_documentees():
     """Le cahier des charges §7.1 fixe exactement sept intentions."""
     assert len(INTENTS) == 7
@@ -77,3 +107,11 @@ def test_telephone_et_lieu_obligatoires_pour_toutes_les_intentions():
         plats = [c for i in items for c in ((i,) if isinstance(i, str) else i)]
         assert "phone" in plats, f"{intent} doit exiger un telephone"
         assert "location" in plats, f"{intent} doit exiger un lieu"
+
+
+def test_nom_evenement_est_obligatoire_et_documente():
+    assert "event_name" in OBLIGATOIRES["evenement"]
+    assert any(
+        ligne.startswith("| `event_name` |") and "| evenement |" in ligne
+        for ligne in TEXTE.splitlines()
+    )
